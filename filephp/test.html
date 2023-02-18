@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="alert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </head>
+  <body>
+    <form
+      method="POST"
+      action="do-something.php"
+      onsubmit="return submitForm(this);"
+    >
+      <input type="submit" />
+    </form>
+    <script>
+      function submitForm(form) {
+        swal({
+          title: "Are",
+          text: "This is a form",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((isOkay) => {
+          if (isOkay) {
+            form.submit();
+          }
+        });
+        return false;
+      }
+
+      function submitForms() {
+        // swal({
+        //   title: "Aadsfadre",
+        //   text: "This is a form",
+        //   icon: "warning",
+        //   buttons: true,
+        //   dangerMode: true,
+        // }).then((isOkay) => {
+        //   if (!isOkay) {
+        //     event.preventDefault();
+        //   } else {
+        //     wi;
+        //   }
+        // });
+        var conf = swal({
+          title: "Aadsfadre",
+          text: "This is a form",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((isOkay) => {
+          if (isOkay) {
+            // form.submit();
+            return true;
+          } else {
+            return false;
+          }
+        });
+
+        if (conf == false) {
+          event.preventDefault();
+        }
+      }
+    </script>
+    <a href="go.html" onclick="submitForms()">Test</a>
+  </body>
+</html>

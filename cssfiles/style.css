@@ -1,0 +1,7 @@
+.body-background{
+    background: radial-gradient(circle, rgba(27,28,74,1) 0%, rgba(15,9,14,1) 93%, rgba(18,16,46,1) 100%);
+}
+.small-box {
+    max-width: 600px;
+
+}
