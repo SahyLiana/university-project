@@ -5,14 +5,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .card {
-            transition: .5s;
+            /* transition: .5s; */
             border-radius: 20px;
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3)
         }
 
-        .card:hover {
+        /* .card:hover {
             transform: scale(1.05);
-        }
+        } */
 
         .card_violet,
         .card_violet .title .fa {
@@ -111,48 +111,60 @@
                                         }
                                     }
                                     ?>
-                <div class="row px-3">
+                <div class="d-flex  w-100 flex-wrap px-3 gap-2">
+                    <style>
+                        .test_flex {
+                            width: 400px;
+                            flex-grow: 1;
+                        }
 
+                        /* @media only screen and (max-width:1000px) {
+                            .text_flex {
+                                width: 100%;
+                                flex-grow: 1;
+                            }
+                        } */
+                    </style>
                     <?php
                     $query = mysqli_query($conn, "Select *from departments;");
                     while ($row = mysqli_fetch_assoc($query)) {
                     ?>
-                        <form action="" class="col-lg-5 card_violet card p-0 col-12 mb-5 p-2 border border-primary me-lg-5 mb-lg-5" method="POST">
+                        <form action="" class=" test_flex card p-0  mb-5  border" method="POST">
 
                             <!-- <div class="col-4"> -->
                             <!-- <div clas=""> -->
-                            <div class="card-body pt-2">
-                                <div class="card-title rounded p-1 ">
-                                    <h5 class=" text-white"><span class=" text-black-50 me-1 fw-bold">Department ID:</span><?php echo $row['dep_id'] ?></h5>
-                                    <h5 class=" text-white"><span class=" text-black-50 me-1 fw-bold">Department Name:</span><?php echo $row['dep_name'] ?></h5>
+                            <div style="cursor: pointer;" class="card-body py-5">
+                                <div class="card-text text-center  p-1 ">
+                                    <h3 class=" "><span class=" text-black-50 me-1 fw-bold">Department ID:</span><?php echo $row['dep_id'] ?></h3>
+                                    <h3 class=" "><span class=" text-black-50 me-1 fw-bold">Department Name:</span><?php echo $row['dep_name'] ?></h3>
                                 </div>
-                                <div class="card-text p-1">
-                                    <p class="fw-bold">Number of lecturers:<span class="h3 fw-bold text-success">
+                            </div>
+                            <div class="card-footer d-flex align-items-center px-3 py-2">
+                                <div class="me-auto">
+                                    <p class="fw-bold text-black-50" style=" font-size:15px">Nbr of lecturers:<span class="h5 fw-bold text-success">
                                             <?php
                                             $did = $row['dep_id'];
                                             $querycount = mysqli_query($conn, "Select COUNT(lecturer_id) as number_lec from lecturers where dep_id='$did'");
                                             $count = mysqli_fetch_assoc($querycount);
                                             echo $count['number_lec'];
                                             ?></span></p>
-                                    <p class="fw-bold">Number of students:<span class="h3 fw-bold text-primary">
+                                    <p class="fw-bold text-black-50" style=" font-size:15px">Nbr of students:<span class="h5 fw-bold text-primary">
                                             <?php
                                             $dsid = $row['dep_id'];
                                             $querycountstudent = mysqli_query($conn, "Select COUNT(student_id) as number_std from students where dep_name='$dsid'");
                                             $countstd = mysqli_fetch_assoc($querycountstudent);
                                             echo $countstd['number_std'];
                                             ?>
-
                                         </span></p>
                                 </div>
-                            </div>
-                            <div class=" p-2 d-flex flex-row">
-                                <!-- <input type="button" value="test" class="btn w-25 fw-bold btn-success " data-bs-toggle="modal" data-bs-target="#deletemodal"> -->
-                                <!-- <input type="button" class="btn btn-success w-50 me-1 btn" data-bs-toggle="modal" data-bs-target="#editmodal" value="Edit" /> -->
-                                <a href="../crud/update.php?id=<?php echo $row['dep_id'] ?> & name=<?php echo $row['dep_name'] ?>" class="btn btn-outline-success  border-2 rounded-pill w-50 me-1">Edit</a>
-                                <!-- <a href="delete.php?id=<?php echo $row['dep_id'] ?>" class="btn btn-success w-50 me-1">Delete</a> -->
-                                <a onclick="test()" href="../actions/delete.php?id=<?php echo $row['dep_id']; ?>" class="btn btn-outline-danger border-2 rounded-pill w-50 btn" name="delete">Delete</a>
-                                <!-- <input type="button" value="Delete" class="btn w-50 fw-bold btn-danger " data-bs-toggle="modal" data-bs-target="#deletemodal"> -->
-                                <!-- <form action="" method="POST">
+                                <div class=" p-2 d-flex flex-row">
+                                    <!-- <input type="button" value="test" class="btn w-25 fw-bold btn-success " data-bs-toggle="modal" data-bs-target="#deletemodal"> -->
+                                    <!-- <input type="button" class="btn btn-success w-50 me-1 btn" data-bs-toggle="modal" data-bs-target="#editmodal" value="Edit" /> -->
+                                    <a href="../crud/update.php?id=<?php echo $row['dep_id'] ?> & name=<?php echo $row['dep_name'] ?>" class="btn btn-outline-success  border-2 rounded-pill w-50 me-1"><i class=" fa fa-edit"></i></a>
+                                    <!-- <a href="delete.php?id=<?php echo $row['dep_id'] ?>" class="btn btn-success w-50 me-1">Delete</a> -->
+                                    <a onclick="test()" href="../actions/delete.php?id=<?php echo $row['dep_id']; ?>" class="btn btn-outline-danger border-2 rounded-pill w-50 btn" name="delete"><i class="fa fa-trash"></i></a>
+                                    <!-- <input type="button" value="Delete" class="btn w-50 fw-bold btn-danger " data-bs-toggle="modal" data-bs-target="#deletemodal"> -->
+                                    <!-- <form action="" method="POST">
                                     <div class="modal fade" id="deletemodal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
@@ -167,8 +179,9 @@
                                         </div>
                                     </div>
                                 </form> -->
-                                <!-- <button onclick="window.location.href = 'delete.php?id=<?php echo $row['dep_id']; ?>;'" id="myButton" name="delete" class="btn btn-danger w-50 btn">Delete</button> -->
-                                <!-- </div> -->
+                                    <!-- <button onclick="window.location.href = 'delete.php?id=<?php echo $row['dep_id']; ?>;'" id="myButton" name="delete" class="btn btn-danger w-50 btn">Delete</button> -->
+                                    <!-- </div> -->
+                                </div>
                             </div>
                             <!-- </div> -->
 
