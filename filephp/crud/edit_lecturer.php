@@ -84,7 +84,7 @@
 
             <?php
             if (isset($_POST['cancel'])) {
-                header('location:lecturers.php');
+                header('location:../view/lecturers.php');
             }
             if (isset($_POST['submit'])) {
                 $lname = $_POST['lname'];

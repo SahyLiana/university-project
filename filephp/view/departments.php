@@ -93,7 +93,7 @@
             <div class="bg-light px-3 d-flex justify-content-between  py-4">
                 <h4 class="left me-auto  text-black">Departements</h4>
 
-                <input type="button" value="Add New Department+" class="btn w-25 fw-bold btn-success rounded-pill " data-bs-toggle="modal" data-bs-target="#adddepartment">
+                <input type="button" value="Add +" class="btn w-25 fw-bold btn-success rounded-pill " data-bs-toggle="modal" data-bs-target="#adddepartment">
             </div>
             <div class="px-4 py-5"> <?php
                                     if (isset($_POST['submit'])) {
@@ -135,13 +135,13 @@
                             <!-- <div clas=""> -->
                             <div style="cursor: pointer;" class="card-body py-5">
                                 <div class="card-text text-center  p-1 ">
-                                    <h3 class=" "><span class=" text-black-50 me-1 fw-bold">Department ID:</span><?php echo $row['dep_id'] ?></h3>
-                                    <h3 class=" "><span class=" text-black-50 me-1 fw-bold">Department Name:</span><?php echo $row['dep_name'] ?></h3>
+                                    <h3 class=" "><span class="fw-bold text-black-50 me-1 ">Department ID:</span><span class=""><?php echo $row['dep_id'] ?></span></h3>
+                                    <h3 class=" "><span class="fw-bold text-black-50 me-1 ">Department Name:</span><span class=""><?php echo $row['dep_name'] ?></span></h3>
                                 </div>
                             </div>
                             <div class="card-footer d-flex align-items-center px-3 py-2">
                                 <div class="me-auto">
-                                    <p class="fw-bold text-black-50" style=" font-size:15px">Nbr of lecturers:<span class="h5 fw-bold text-success">
+                                    <p class="fw-bold p-0 m-0 text-black-50" style=" font-size:15px">Nbr of lecturers:<span class="h5 fw-bold text-success">
                                             <?php
                                             $did = $row['dep_id'];
                                             $querycount = mysqli_query($conn, "Select COUNT(lecturer_id) as number_lec from lecturers where dep_id='$did'");

@@ -19,6 +19,23 @@
         // }
         ?>
         <style>
+            #edit:hover {
+                color: white;
+
+            }
+
+            #edit {
+                color: blue;
+            }
+
+            #trash {
+                color: red;
+            }
+
+            #trash:hover {
+                color: white;
+            }
+
             .sidebar {
                 position: fixed;
                 top: 0;
@@ -84,7 +101,7 @@
                 <?php
                 if ($_SESSION['title'] == 'admin') {
                 ?>
-                    <input type="button" value="Add New Course+" class="btn rounded-pill w-25 fw-bold btn-success " data-bs-toggle="modal" data-bs-target="#addcourses">
+                    <input type="button" value="Add +" class="btn rounded-pill w-25 fw-bold btn-success " data-bs-toggle="modal" data-bs-target="#addcourses">
                 <?php
                 }
                 ?>
@@ -131,7 +148,7 @@
                                         <?php
                                         if ($_SESSION['title'] == 'admin') {
                                         ?>
-                                            <th style="width:10%" colspan="2">Actions</th>
+                                            <th class="text-center" style="width:10%">Actions</th>
                                         <?php
                                         }
                                         ?>
@@ -156,12 +173,13 @@
                                                 } ?></td>
                                             <?php
                                             if ($_SESSION['title'] == 'admin') { ?>
-                                                <td><a href="../crud/edit_course.php?id=<?php echo $rowcourses['course_id'] ?> & name=<?php echo $rowcourses['course_name'] ?>
-                                            ">Edit</a>
-                                                <td><a href="../crud/delete_course.php?id=<?php echo $rowcourses['course_id'] ?>" class=" text-danger">Delete</a>
+                                                <td class=" text-center"><a id="edit" href="../crud/edit_course.php?id=<?php echo $rowcourses['course_id'] ?> & name=<?php echo $rowcourses['course_name'] ?>
+                                            "><i class="fa fa-edit"></i></a>
+                                                    <a href="../crud/delete_course.php?id=<?php echo $rowcourses['course_id'] ?>" class="" id="trash"><i class="fa fa-trash"></i></a>
                                                 <?php
                                             }
                                                 ?>
+                                                </td>
                                         </tr>
                                     <?php
                                     } ?>

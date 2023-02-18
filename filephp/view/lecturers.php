@@ -90,10 +90,28 @@
                 <?php
                 if ($_SESSION['title'] == 'admin') {
                 ?>
-                    <input type="button" value="Add New Lecturer+" class="btn rounded-pill w-25 fw-bold btn-success " onclick="window.location.href='../crud/add_lecturer.php'">
+                    <input type="button" value="Add +" class="btn rounded-pill w-25 fw-bold btn-success " onclick="window.location.href='../crud/add_lecturer.php'">
                 <?php
                 }
                 ?>
+                <style>
+                    #edit:hover {
+                        color: white;
+
+                    }
+
+                    #edit {
+                        color: blue;
+                    }
+
+                    #trash {
+                        color: red;
+                    }
+
+                    #trash:hover {
+                        color: white;
+                    }
+                </style>
             </div>
             <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus mollitia necessitatibus quo voluptate assumenda ad dolorum fugit porro esse tempore! Libero amet obcaecati ab minus odio facere blanditiis adipisci eum!</p> -->
             <?php
@@ -130,7 +148,7 @@
                                         <?php
                                         if ($_SESSION['title'] == 'admin') {
                                         ?>
-                                            <th style="width: 10%;" colspan="2">Actions</th>
+                                            <th class="text-center" style="width: 10%;">Actions</th>
                                         <?php
                                         }
                                         ?>
@@ -149,12 +167,17 @@
                                             <?php
                                             if ($_SESSION['title'] == 'admin') {
                                             ?>
-                                                <td><a href="../crud/edit_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?> & name=<?php echo $rowlecturers['lecturer_name'] ?>
-                                        ">Edit</a>
-                                                <td><a href="../crud/delete_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?>" class=" text-danger">Delete</a>
+
+                                                <td class="text-center">
+                                                    <a class=" " id="edit" href="../crud/edit_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?> & name=<?php echo $rowlecturers['lecturer_name'] ?>
+                                        "><i class="fa fa-edit"></i></a>
+                                                    <a href="../crud/view_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?> " class="text-white"><i class="fa fa-eye"></i></a>
+                                                    <!-- <button class="btn btn-outline-primary" onlick="window.location.href='../crud/edit_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?>'& name=<?php echo $rowlecturers['lecturer_name'] ?>"><i class="fa fa-edit"></i></button> -->
+                                                    <a id="trash" href="../crud/delete_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?>" class=""><i class="fa fa-trash"></i></a>
                                                 <?php
                                             }
                                                 ?>
+                                                </td>
                                         </tr>
                                     <?php
                                     } ?>

@@ -14,7 +14,7 @@
     ?>
     <div class="container p-0 my-auto rounded shadow-sm">
         <div class="mb-3 bg-light p-3">
-            <h2 class="bg-light text-primary text-center">Add new student</h2>
+            <h2 class="bg-light text-primary text-center fw-bold">Add </h2>
         </div>
         <form action="" method="POST">
             <!-- <div class="row ps-3 mb-3">

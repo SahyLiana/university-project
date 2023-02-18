@@ -1,7 +1,6 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" /> -->
     <link href="../cssfiles/style.css">
 </head>
 
@@ -17,9 +16,27 @@
             width: 25%
         }
 
+        #edit:hover {
+            color: white;
+
+        }
+
+        #edit {
+            color: blue;
+        }
+
+        #trash {
+            color: red;
+        }
+
+        #trash:hover {
+            color: white;
+        }
+
+
         /* .left {
     width: 25%;
-} */
+    } */
 
         .right {
             width: 75%;
@@ -81,7 +98,7 @@
                 <?php
                 if ($_SESSION['title'] == 'admin') {
                 ?>
-                    <input type="button" class="btn btn-success rounded-pill fw-bold w-25" onclick="window.location.href='../crud/add_student.php'" value="Add New Student+" />
+                    <input type="button" class="btn btn-success rounded-pill fw-bold w-25" onclick="window.location.href='../crud/add_student.php'" value="Add +" />
                 <?php
                 }
                 ?>
@@ -155,10 +172,10 @@
                                                 <?php
                                                 if ($_SESSION['title'] == 'admin') {
                                                 ?>
-                                                    <td><a href="../crud/edit_student.php?id=<?php echo $rowstudents['student_id'] ?> & name=<?php echo $rowstudents['student_name'] ?> & dep_name=<?php echo $rowstudents['dep_name'] ?>
+                                                    <td><a id="edit" href="../crud/edit_student.php?id=<?php echo $rowstudents['student_id'] ?> & name=<?php echo $rowstudents['student_name'] ?> & dep_name=<?php echo $rowstudents['dep_name'] ?>
                                         "><i class="fa fa-edit"></i></a>
                                                         <a href="../crud/view_student.php?id=<?php echo $rowstudents['student_id'] ?> " class="text-white"><i class="fa fa-eye"></i></a>
-                                                        <a href="../crud/delete_student.php?id=<?php echo $rowstudents['student_id'] ?> " class=" text-danger"><i class="fa fa-trash"></i></a>
+                                                        <a href="../crud/delete_student.php?id=<?php echo $rowstudents['student_id'] ?> " id="trash" class=""><i class="fa fa-trash"></i></a>
                                                     </td>
                                                 <?php
                                                 }
