@@ -174,7 +174,7 @@
                                                 ?>
                                                     <td><a id="edit" href="../crud/edit_student.php?id=<?php echo $rowstudents['student_id'] ?> & name=<?php echo $rowstudents['student_name'] ?> & dep_name=<?php echo $rowstudents['dep_name'] ?>
                                         "><i class="fa fa-edit"></i></a>
-                                                        <a href="../crud/view_student.php?id=<?php echo $rowstudents['student_id'] ?> " class="text-white"><i class="fa fa-eye"></i></a>
+                                                        <a href="view_student.php?id=<?php echo $rowstudents['student_id'] ?> " class="text-white"><i class="fa fa-eye"></i></a>
                                                         <a href="../crud/delete_student.php?id=<?php echo $rowstudents['student_id'] ?> " id="trash" class=""><i class="fa fa-trash"></i></a>
                                                     </td>
                                                 <?php

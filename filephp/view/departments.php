@@ -7,7 +7,7 @@
         .card {
             /* transition: .5s; */
             border-radius: 20px;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3)
+            box-shadow: 0 5px 7px rgba(0, 0, 0, 0.3)
         }
 
         /* .card:hover {
