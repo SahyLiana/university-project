@@ -50,28 +50,28 @@
                     <h3 class="fw-bold w-100 text-center">School Panel</h3>
                 </div>
                 <p class=" ps-3 pt-3 text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
-                <a href="dashboard.php" class=" nav-link ">Home</a>
+                <a href="dashboard.php" class=" nav-link "><i class="fa fa-home me-1"></i>Home</a>
                 <?php
                 if ($_SESSION['title'] == "admin") {
                 ?>
-                    <a href="departments.php" class=" nav-link">Departments</a>
+                    <a href="departments.php" class=" nav-link"><i class="fas fa-school me-1"></i>Departments</a>
                 <?php
                 } ?>
                 <?php
                 if ($_SESSION['title'] == 'student') { ?>
-                    <a href="exam_registration.php" class=" nav-link">Register for exam</a>
+                    <a href="exam_registration.php" class=" nav-link"><i class=" fa fa-register me-1"></i>Register for exam</a>
                 <?php
                 }
                 ?>
                 <?php
                 if ($_SESSION['title'] == 'admin' || $_SESSION['title'] == 'lecturer') {
-                ?><a href="students.php" class=" nav-link">Students</a>
+                ?><a href="students.php" class=" nav-link"><i class="fas fa-graduation-cap me-1"></i>Students</a>
                 <?php
                 }
                 ?>
-                <a href="lecturers.php " class=" nav-link">Lecturers</a>
-                <a href="courses.php" class=" nav-link">Courses</a>
-                <a href="settings.php " class="active nav-link">Settings</a>
+                <a href="lecturers.php " class=" nav-link"><i class="fas fa-chalkboard-teacher me-1"></i>Lecturers</a>
+                <a href="courses.php" class=" nav-link"><i class="fas fa-book-reader me-1"></i>Courses</a>
+                <a href="settings.php " class="active nav-link"><i class="fa fa-cog me-1"></i>Settings</a>
                 <button type="button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Log out
                 </button>

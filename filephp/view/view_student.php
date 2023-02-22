@@ -16,14 +16,17 @@
 
 <body class="">
     <?php require('../config/config.php');
+    // require('../actions/upload_img.php');
+    $id = $_GET['id'];
     if (!isset($_SESSION['username']) || $_SESSION['title'] == 'student') {
         header('location:admin.php');
     }
-    $id = $_GET['id'];
+    // $id = $_GET['id'];
     $query = mysqli_query($conn, "Select *from students where student_id='$id'");
 
     $row_student = mysqli_fetch_assoc($query);
     $dep_id = $row_student['dep_name'];
+    $user_img = $row_student['profile'];
     $query_dep = mysqli_query($conn, "Select *from departments where dep_id='$dep_id'");
     $row_dep = mysqli_fetch_assoc($query_dep);
     ?>
@@ -33,8 +36,22 @@
         <h1 class="text-center mb-5">Student profile</h1>
         <div class="d-flex">
             <div class=" w-25" style=" height:50%;">
-                <img src="images/passphoto.jpg" class="rounded mb-1" width="100%">
-                <button class=" btn btn-primary w-100">Edit photo</button>
+                <?php
+                if (empty($user_img)) {
+
+                ?>
+                    <img src="../userimage/avatar.jpg" class="rounded mb-1" width="100%">
+                <?php
+                } else { ?>
+
+                    <img src="<?php echo $user_img ?>" class="rounded mb-1" width="100%">
+                <?php
+                }
+                ?>
+                <form action="../actions/upload_img.php?id=<?php echo $id ?>" method="POST" enctype='multipart/form-data'>
+                    <input type='file' name='photo' class="form-control" />
+                    <button class=" btn btn-primary w-100" type="submit" name="upload_photo">Upload photo</button>
+                </form>
             </div>
             <div class="w-75 border p-3 rounded-3 ms-3">
                 <p class="p-0 m-1"><span class="fw-bold ">Student name:</span>
