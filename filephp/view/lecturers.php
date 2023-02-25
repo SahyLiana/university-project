@@ -171,7 +171,7 @@
                                                 <td class="text-center">
                                                     <a class=" " id="edit" href="../crud/edit_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?> & name=<?php echo $rowlecturers['lecturer_name'] ?>
                                         "><i class="fa fa-edit"></i></a>
-                                                    <a href="../crud/view_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?> " class="text-white"><i class="fa fa-eye"></i></a>
+                                                    <a href="view_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?> " class="text-white"><i class="fa fa-eye"></i></a>
                                                     <!-- <button class="btn btn-outline-primary" onlick="window.location.href='../crud/edit_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?>'& name=<?php echo $rowlecturers['lecturer_name'] ?>"><i class="fa fa-edit"></i></button> -->
                                                     <a id="trash" href="../crud/delete_lecturer.php?id=<?php echo $rowlecturers['lecturer_id'] ?>" class=""><i class="fa fa-trash"></i></a>
                                                 <?php

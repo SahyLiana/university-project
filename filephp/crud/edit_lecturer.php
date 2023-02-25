@@ -36,7 +36,7 @@
                     <label for="lid" class="fw-bold">Lecturer ID:</label>
                 </div>
                 <div class="col-5">
-                    <input type="text" name="lid" id="lid" class="fs-5 p-3 form-control w-100" value='<?php echo $_GET["id"] ?>'>
+                    <input type="text" name="lid" id="lid" disabled class="fs-5 p-3 form-control w-100" value='<?php echo $_GET["id"] ?>'>
                 </div>
             </div>
             <div class="row ps-3 mb-3">
@@ -58,7 +58,7 @@
 
                         while ($rowdpt = mysqli_fetch_assoc($querydept)) {
                         ?>
-                            <option value="<?php echo $rowdpt['dep_id'] ?>"> <?php echo $rowdpt['dep_name'] ?></option>
+                            <option value="<?php echo $rowdpt['dep_id'] ?>"> <?php echo $rowdpt['dep_name']; ?></option>
                         <?php
                         }
 
@@ -71,7 +71,12 @@
                     <label for="contact" class="fw-bold">Contact:</label>
                 </div>
                 <div class="col-5">
-                    <input type="text" name="contact" id="contact" class="p-3 fs-5 form-control w-100" placeholder="eg:+861234567">
+                    <?php
+                    $id = $_GET['id'];
+                    $query_lec = mysqli_query($conn, "Select *from lecturers where lecturer_id='$id'");
+                    $row_lec = mysqli_fetch_assoc($query_lec);
+                    ?>
+                    <input type="text" name="contact" id="contact" value="<?php echo $row_lec['contact'] ?>" class="p-3 fs-5 form-control w-100" placeholder="eg:+861234567">
                 </div>
             </div>
 
