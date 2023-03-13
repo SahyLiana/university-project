@@ -49,7 +49,10 @@
                     <img src="images/logo.png" class="img-container w-25">
                     <h3 class="fw-bold w-100 text-center">School Panel</h3>
                 </div>
-                <p class=" ps-3 pt-3 text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
+                <div class="px-2 w-100 align-items-center d-flex mb-2">
+                    <img src="../userimage/avatar.jpg" class="" width="30px">
+                    <p class="ps-2 pt-3  text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
+                </div>
                 <a href="dashboard.php" class=" nav-link "><i class="fa fa-home me-1"></i>Home</a>
                 <?php
                 if ($_SESSION['title'] == "admin") {
@@ -59,7 +62,7 @@
                 } ?>
                 <?php
                 if ($_SESSION['title'] == 'student') { ?>
-                    <a href="exam_registration.php" class=" nav-link"><i class=" fa fa-register me-1"></i>Register for exam</a>
+                    <a href="exam_registration.php" class=" nav-link"><i class=" fa fa-registered me-1"></i>Register for exam</a>
                 <?php
                 }
                 ?>

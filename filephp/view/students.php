@@ -68,7 +68,10 @@
                     <img src="images/logo.png" class="img-container w-25">
                     <h3 class="fw-bold w-100 text-center">School Panel</h3>
                 </div>
-                <p class=" ps-3 pt-3 text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
+                <div class="px-2 w-100 align-items-center d-flex mb-2">
+                    <img src="../userimage/avatar.jpg" class="" width="30px">
+                    <p class="ps-2 pt-3  text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
+                </div>
                 <a href="dashboard.php" class=" nav-link "><i class="fa fa-home me-1"></i>Home</a>
                 <?php
                 if ($_SESSION['title'] == "admin") {
@@ -112,87 +115,171 @@
                     // $depid = $rowdepartments['dep_id'];
                     // $queryselec_students = mysqli_query($conn, "Select *from students where dep_name='$depid';");
                     // $row_query_students = $queryselec_students->num_rows;
-                } else if ($_SESSION['title'] == 'lecturer') {
-                    $uid = $_SESSION['userid'];
-                    $queryselec_lec = mysqli_query($conn, "Select *from lecturers where lecturer_id='$uid'");
-                    $row_search = mysqli_fetch_assoc($queryselec_lec);
-                    $row_dep = $row_search['dep_id'];
-                    $queryselec_dept = mysqli_query($conn, "Select *from departments where dep_id='$row_dep';");
-                }
-
-                while ($rowdepartments = mysqli_fetch_assoc($queryselec_dept)) {
+                    while ($rowdepartments = mysqli_fetch_assoc($queryselec_dept)) {
 
                 ?>
-                    <div class=" my-5 px-3">
-                        <h3>Department of <span class=" text-success"><?php echo $rowdepartments['dep_name'] ?></span></h3>
-                        <hr>
-                        <?php
-                        $ddp = $rowdepartments['dep_id'];
-                        $row_std = mysqli_query($conn, "Select *from students where dep_name='$ddp'");
-                        // $row_st=mysqli_fetch_assoc($row_std);
-                        $row_query_students = $row_std->num_rows;
-                        if ($row_query_students > 0) {
-                        ?>
-                            <div class=" my-4 table-responsive-md">
-                                <table class=" table table-dark table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th class="">Student Id</th>
-                                            <th class="">Student Name</th>
-                                            <!-- <th>Department Name</th> -->
-                                            <th>Gender</th>
-                                            <th>DOB</th>
-                                            <th>Year</th>
-                                            <th>Semester</th>
-                                            <th>Date joined</th>
-                                            <th>Contact</th>
-                                            <?php
-                                            if ($_SESSION['title'] == 'admin') {
-                                            ?>
-                                                <th>Actions</th>
-                                            <?php
-                                            }
-                                            ?>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-
-                                        while ($rowstudents = mysqli_fetch_assoc($row_std)) {
-                                        ?>
-                                            <tr style="cursor: pointer;">
-                                                <td><?php echo $rowstudents['student_id'] ?></td>
-                                                <td><?php echo $rowstudents['student_name'] ?></td>
-                                                <!-- <td><?php echo $rowstudents['dep_name'] ?></td> -->
-                                                <td><?php echo $rowstudents['gender'] ?></td>
-                                                <td><?php echo $rowstudents['dob'] ?></td>
-                                                <td><?php echo $rowstudents['year'] ?></td>
-                                                <td><?php echo $rowstudents['semester'] ?></td>
-                                                <td><?php echo $rowstudents['date_joined'] ?></td>
-                                                <td><?php echo $rowstudents['contact'] ?></td>
+                        <div class=" my-5 px-3">
+                            <h3>Department of <span class=" text-success"><?php echo $rowdepartments['dep_name'] ?></span></h3>
+                            <hr>
+                            <?php
+                            $ddp = $rowdepartments['dep_id'];
+                            $row_std = mysqli_query($conn, "Select *from students where dep_name='$ddp'");
+                            // $row_st=mysqli_fetch_assoc($row_std);
+                            $row_query_students = $row_std->num_rows;
+                            if ($row_query_students > 0) {
+                            ?>
+                                <div class=" my-4 table-responsive-md">
+                                    <table class=" table table-dark table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="">Student Id</th>
+                                                <th class="">Student Name</th>
+                                                <!-- <th>Department Name</th> -->
+                                                <th>Gender</th>
+                                                <th>DOB</th>
+                                                <th>Year</th>
+                                                <th>Semester</th>
+                                                <th>Date joined</th>
+                                                <th>Contact</th>
                                                 <?php
                                                 if ($_SESSION['title'] == 'admin') {
                                                 ?>
-                                                    <td><a id="edit" href="../crud/edit_student.php?id=<?php echo $rowstudents['student_id'] ?> & name=<?php echo $rowstudents['student_name'] ?> & dep_name=<?php echo $rowstudents['dep_name'] ?>
-                                        "><i class="fa fa-edit"></i></a>
-                                                        <a href="view_student.php?id=<?php echo $rowstudents['student_id'] ?> " class="text-white"><i class="fa fa-eye"></i></a>
-                                                        <a href="../crud/delete_student.php?id=<?php echo $rowstudents['student_id'] ?> " id="trash" class=""><i class="fa fa-trash"></i></a>
-                                                    </td>
+                                                    <th>Actions</th>
                                                 <?php
                                                 }
                                                 ?>
                                             </tr>
-                                        <?php
-                                        } ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+
+                                            while ($rowstudents = mysqli_fetch_assoc($row_std)) {
+                                            ?>
+                                                <tr style="cursor: pointer;">
+                                                    <td><?php echo $rowstudents['student_id'] ?></td>
+                                                    <td><?php echo $rowstudents['student_name'] ?></td>
+                                                    <!-- <td><?php echo $rowstudents['dep_name'] ?></td> -->
+                                                    <td><?php echo $rowstudents['gender'] ?></td>
+                                                    <td><?php echo $rowstudents['dob'] ?></td>
+                                                    <td><?php echo $rowstudents['year'] ?></td>
+                                                    <td><?php echo $rowstudents['semester'] ?></td>
+                                                    <td><?php echo $rowstudents['date_joined'] ?></td>
+                                                    <td><?php echo $rowstudents['contact'] ?></td>
+                                                    <?php
+                                                    if ($_SESSION['title'] == 'admin') {
+                                                    ?>
+                                                        <td><a id="edit" href="../crud/edit_student.php?id=<?php echo $rowstudents['student_id'] ?> & name=<?php echo $rowstudents['student_name'] ?> & dep_name=<?php echo $rowstudents['dep_name'] ?>
+                                "><i class="fa fa-edit"></i></a>
+                                                            <a href="view_student.php?id=<?php echo $rowstudents['student_id'] ?> " class="text-white"><i class="fa fa-eye"></i></a>
+                                                            <a href="../crud/delete_student.php?id=<?php echo $rowstudents['student_id'] ?> " id="trash" class=""><i class="fa fa-trash"></i></a>
+                                                        </td>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </tr>
+                                            <?php
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php
+                            } ?>
+                        </div>
                         <?php
-                        } ?>
-                    </div>
-                <?php
-                }
-                ?>
+                    }
+                        ?><?php
+                        } else if ($_SESSION['title'] == 'lecturer') {
+                            $uid = $_SESSION['userid'];
+                            $lec_name = $_SESSION['username'];
+                            $queryselec_courses = mysqli_query($conn, "Select *from courses WHERE lecturer='$lec_name'");
+                            $rows_lec = ($queryselec_courses->num_rows);
+                            while ($row_course_taught = mysqli_fetch_assoc($queryselec_courses)) {
+                                // $row_course_taught = mysqli_fetch_assoc($queryselec_courses);
+                                $year_course = $row_course_taught['year'];
+                                $semester_course = $row_course_taught['semester'];
+                                $row_dep = $row_course_taught['dep_id'];
+                                // $queryselec_lec = mysqli_query($conn, "Select *from lecturers where lecturer_id='$uid'");
+                                // $row_search = mysqli_fetch_assoc($queryselec_lec);
+                                // $row_dep = $row_search['dep_id'];
+                                // $queryselec_dept = mysqli_query($conn, "Select *from departments where dep_id='$row_dep';");
+                                $queryselec_dept = mysqli_query($conn, "Select * from departments where dep_id='$row_dep'");
+
+                                while ($rowdepartments = mysqli_fetch_assoc($queryselec_dept)) {
+
+                            ?>
+                        <div class=" my-5 px-3">
+                            <h3>Department of <span class=" text-success"><?php echo $rowdepartments['dep_name'] . ",Course name: " . $row_course_taught['course_name'] . ", year " . $year_course . " semester " . $semester_course ?></span></h3>
+                            <hr>
+                            <?php
+                                    $ddp = $rowdepartments['dep_id'];
+                                    $row_std = mysqli_query($conn, "Select *from students where dep_name='$ddp' and year='$year_course' and semester='$semester_course'");
+                                    // $row_st=mysqli_fetch_assoc($row_std);
+                                    $row_query_students = $row_std->num_rows;
+                                    if ($row_query_students > 0) {
+                            ?>
+                                <div class=" my-4 table-responsive-md">
+                                    <table class=" table table-dark table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="">Student Id</th>
+                                                <th class="">Student Name</th>
+                                                <!-- <th>Department Name</th> -->
+                                                <th>Gender</th>
+                                                <th>DOB</th>
+                                                <th>Year</th>
+                                                <th>Semester</th>
+                                                <th>Date joined</th>
+                                                <th>Contact</th>
+                                                <?php
+
+                                                ?>
+                                                <th>Actions</th>
+                                                <?php
+
+                                                ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+
+                                            while ($rowstudents = mysqli_fetch_assoc($row_std)) {
+                                            ?>
+                                                <tr style="cursor: pointer;">
+                                                    <td><?php echo $rowstudents['student_id'] ?></td>
+                                                    <td><?php echo $rowstudents['student_name'] ?></td>
+                                                    <!-- <td><?php echo $rowstudents['dep_name'] ?></td> -->
+                                                    <td><?php echo $rowstudents['gender'] ?></td>
+                                                    <td><?php echo $rowstudents['dob'] ?></td>
+                                                    <td><?php echo $rowstudents['year'] ?></td>
+                                                    <td><?php echo $rowstudents['semester'] ?></td>
+                                                    <td><?php echo $rowstudents['date_joined'] ?></td>
+                                                    <td><?php echo $rowstudents['contact'] ?></td>
+                                                    <?php
+
+                                                    ?>
+                                                    <td>
+                                                        <a href="view_result.php?id=<?php echo $rowstudents['student_id'] ?>" class="btn btn-success">Marks</a>
+                                                    </td>
+                                                    <?php
+
+                                                    ?>
+                                                </tr>
+                                            <?php
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php
+                                    } ?>
+                        </div>
+                        <?php
+                                }
+                        ?><?php
+
+                            }
+                        }
+
+                            ?>
             </div>
         </div>
         <form action="" method="POST">

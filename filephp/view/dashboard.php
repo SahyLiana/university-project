@@ -1,7 +1,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 
 <body>
@@ -41,6 +41,7 @@
         //     session_unset();
         //     header('location:admin.php');
         // }
+
         ?>
         <div class="h-100 sidebar align-items-stretch  navbar navbar-dark bg-dark ">
             <div class="nav flex-column w-100  nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -48,7 +49,10 @@
                     <img src="images/logo.png" class="img-container w-25">
                     <h3 class="fw-bold w-100 text-center">School Panel</h3>
                 </div>
-                <p class=" ps-3 pt-3 text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
+                <div class="px-2 w-100 align-items-center d-flex mb-2">
+                    <img src="../userimage/avatar.jpg" class="" width="30px">
+                    <p class="ps-2 pt-3  text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
+                </div>
                 <a href="dashboard.php" class=" nav-link active"><i class="fa fa-home me-1"></i>Home</a>
                 <?php
                 if ($_SESSION['title'] == "admin") {
@@ -64,7 +68,7 @@
                 ?>
                 <?php
                 if ($_SESSION['title'] == 'student') { ?>
-                    <a href="exam_registration.php" class=" nav-link"><i class=" fa fa-register me-1"></i>Register for exam</a>
+                    <a href="exam_registration.php" class=" nav-link"><i class=" fa fa-registered me-1"></i>Register for exam</a>
                 <?php
                 }
                 ?>
@@ -77,8 +81,17 @@
             </div>
         </div>
         <div class="right ">
-            <div class="bg-light py-4 px-3 ">
+            <div class="bg-light py-4 d-flex justify-content-between px-3 ">
                 <h4 class=" text-black">Home</h4>
+                <?php
+
+                if ($_SESSION['title'] == 'student') {
+                    $stdId = $_SESSION['userid'];
+                ?>
+                    <a href="myResult.php?id=<?php echo $stdId ?>" class="btn btn-success">View my Result</a>
+                <?php
+                }
+                ?>
             </div>
             <div class="px-3 py-5">
                 <p>You are a <?php echo $_SESSION['title'] ?></p>

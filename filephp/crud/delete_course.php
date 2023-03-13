@@ -7,8 +7,10 @@ if (!isset($_SESSION['username'])) {
 } else {
     // echo "Delete page";
     $id = $_GET['id'];
+    $depid = $_GET['depid'];
     echo $id;
-    $query_delete = mysqli_query($conn, "Delete from courses where course_id='$id'");
+    $query_delete = mysqli_query($conn, "Delete from courses where course_id='$id' AND dep_id='$depid'");
+    $query_deleteRegister = mysqli_query($conn, "Delete from register where cu_id='$id'");
     if ($query_delete) {
 ?>
         <script>

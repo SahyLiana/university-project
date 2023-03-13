@@ -4,32 +4,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../cssfiles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        .bg-panel {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .bg-input {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
 </head>
 
-<body class="body-background d-flex justify-content-center align-items-center">
-    <div style="border-top:aqua solid 1px; border-bottom:aqua solid 1px" class="small-box bg-black my-auto text-white px-5 rounded-5 py-3 ">
+
+<body class=" d-flex justify-content-center align-items-center" style=" background-image: url('images/bg-body.png');">
+    <div style="border-top:aqua solid 1px; border-bottom:aqua solid 1px" class="small-box bg-panel my-auto text-white px-5 rounded-5 py-3 ">
         <div class=" text-center m-5">
-            <img class="w-50 img-fluid" src="images/logo2.png" />
-            <h4 class=" fw-bolder">LOGIN PANEL</h4>
+            <img class="w-50 rounded img-thumbnail img-fluid" src="images/kulg.jpg" />
+            <h2 class="mt-2 fw-bolder">KAMPALA UNIVERSITY</h2>
             <p class=" text-white-50">Control panel login</p>
         </div>
         <form action="" method="POST">
             <div class="row gap-3 my-4">
                 <div class="col-1">
                     <label for="username">
-                        <span class="fa fa-user fs-2 text-primary"></span></label>
+                        <span class="fa fa-user fs-2 text-white"></span></label>
                 </div>
                 <div class="col-10">
-                    <input type="text" name="username" id="username" class=" fs-4  form-control border-top-0 border-start-0 border-end-0 px-1 py-2 bg-black text-white" placeholder="Username" />
+                    <input type="text" name="username" id="username" style="cursor:pointer" class=" fs-4 form-control border-top-0 border-start-0 border-end-0 bg-body-emphasis px-1 py-2  " placeholder="Username" />
                 </div>
             </div>
             <div class="row gap-3 my-4">
                 <div class="col-1">
                     <label for="password">
-                        <span class="fa fa-lock fs-2 text-primary"></span></label>
+                        <span class="fa fa-lock fs-2 text-white"></span></label>
                 </div>
                 <div class="col-10">
-                    <input type="password" name="password" id="password" class=" fs-4  form-control border-top-0 border-start-0 border-end-0 px-1 py-2 bg-black text-bg-dark" placeholder="Password" />
+                    <input type="password" name="password" id="password" style="cursor:pointer" class=" fs-4  form-control border-top-0 border-start-0 bg-body-emphasis border-end-0 px-1 py-2  " placeholder="Password" />
                 </div>
             </div>
             <div class="row gap-3 my-2">
@@ -74,16 +84,17 @@
                     ?>
                 </div>
             </div>
-            <div class="row gap-0 my-2">
-                <div class="col-1">
+            <div class="row gap-3 my-2">
+                <!-- <div class="col-1">
 
+                </div> -->
+                <div class="col-12">
+                    <button name="login" class="w-100 rounded-5 px-4 btn py-2 fw-bolder btn-lg  btn-success">Login</button>
                 </div>
-                <div class="col-3">
-                    <button name="login" class=" rounded-5 px-4 btn py-2 fw-bolder btn-lg  btn-success">Login</button>
-                </div>
-
-                <div class="col-3">
-                    <button name="register" class=" rounded-5 px-4 btn py-2 fw-bolder btn-lg  btn-primary">Register</button>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button name="register" class="w-100 rounded-5 px-4 btn py-2 fw-bolder btn-lg  btn-primary">Register</button>
                 </div>
             </div>
         </form>

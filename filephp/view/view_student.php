@@ -86,6 +86,7 @@
             <button onclick="window.print()">Print</button> -->
         <div class=" d-flex gap-2 w-100 justify-content-end mt-2">
             <button onclick="window.print()" class="btn btn-lg btn-success">Print</button>
+            <button onclick=location.href="view_result.php?id=<?php echo $_GET['id']; ?>" class="btn btn-lg btn-primary">View Result</button>
             <button onclick="location.href='students.php'" class="btn btn-lg btn-secondary">Cancel</button>
         </div>
     </div>

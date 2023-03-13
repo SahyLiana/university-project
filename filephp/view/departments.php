@@ -72,7 +72,10 @@
                     <img src="images/logo.png" class="img-container w-25">
                     <h3 class="fw-bold w-100 text-center">School Panel</h3>
                 </div>
-                <p class=" ps-3 pt-3 text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
+                <div class="px-2 w-100 align-items-center d-flex mb-2">
+                    <img src="../userimage/avatar.jpg" class="" width="30px">
+                    <p class="ps-2 pt-3  text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
+                </div>
                 <a href="dashboard.php" class=" nav-link "><i class="fa fa-home me-1"></i>Home</a>
                 <a href="departments.php" class="active nav-link"><i class="fas fa-school me-1"></i>Departments</a>
                 <?php
@@ -135,7 +138,7 @@
                             <!-- <div class="col-4"> -->
                             <!-- <div clas=""> -->
                             <div style="cursor: pointer;" class="card-body py-5">
-                                <div class="card-text text-center  p-1 ">
+                                <div class="card-text text-start  p-1 ">
                                     <h3 class=" "><span class="fw-bold text-black-50 me-1 ">Department ID:</span><span class=""><?php echo $row['dep_id'] ?></span></h3>
                                     <h3 class=" "><span class="fw-bold text-black-50 me-1 ">Department Name:</span><span class=""><?php echo $row['dep_name'] ?></span></h3>
                                 </div>
@@ -257,24 +260,12 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row mb-3">
-                                    <!-- <div class="col-3">
-                                        <label for="dep_id" class=" small">Department Id</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input type="text" name="dep_id" class=" form-control py-2" placeholder="eg:BCIT" />
-                                    </div> -->
                                     <div class="form-floating">
                                         <input type="text" name="dep_id" placeholder="Nice" class=" form-control" id="dep_id" />
                                         <label for="dep_id" class="px-3 form-label">Department Id</label>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <!-- <div class="col-3">
-                                        <label for="dep_name" class=" small">Department name</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input type="text" name="dep_name" class=" form-control py-2" placeholder="eg:Computer and IT" />
-                                    </div> -->
                                     <div class="form-floating">
                                         <input type="text" name="dep_name" placeholder="Nice" class=" form-control" id="dep_name" />
                                         <label for="dep_name" class="px-3 form-label">Department name</label>

@@ -1,4 +1,4 @@
-<?php require('config.php'); ?>
+<?php require('config/config.php'); ?>
 <form action="" method="POST">
     <select name="language">
         <?php
@@ -130,7 +130,31 @@ if (isset($_POST['submit'])) {
     });
 </script>
 <?php
-echo $_SESSION['dname'];
-echo $_SESSION['ddid'];
+// echo $_SESSION['dname'];
+// echo $_SESSION['ddid'];
 
 ?>
+
+<h1>Test for registration</h1>
+<form action="" method="POST">
+    <?php
+    $query = mysqli_query($conn, "Select *from test;");
+    while ($row = mysqli_fetch_assoc($query)) {
+    ?>
+        <input type="checkbox" name="test[]" value="<?php echo $row['name'] ?>"><?php echo $row['name'] ?><br>
+    <?php
+    }
+
+    ?>
+    <button name="test_marks">Click me!</button>
+    <?php
+    if (isset($_POST['test_marks'])) {
+        if (!empty($_POST['test'])) {
+            foreach ($_POST['test'] as $names) {
+                echo $names;
+            }
+        }
+    }
+
+    ?>
+</form>

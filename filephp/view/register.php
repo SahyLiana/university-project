@@ -71,14 +71,6 @@
                 </div>
             </div>
 
-            <!-- <div class="row ps-3 mb-3">
-                <div class="col-2">
-                    <label for="contact" class=" small">Contact</label>
-                </div>
-                <div class="col-5">
-                    <input type="text" name="contact" required class="  form-control py-2" placeholder="eg:+86-1234567" />
-                </div>
-            </div> -->
             <div class="d-flex border-top-1 p-3 flex-row justify-content-end">
 
                 <div class="d-flex gap-2">
