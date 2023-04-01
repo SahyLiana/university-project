@@ -19,6 +19,10 @@
         // }
         ?>
         <style>
+            .right .bg_top {
+                background-color: darkseagreen;
+            }
+
             #edit:hover {
                 color: white;
 
@@ -58,12 +62,20 @@
             .cont {
                 max-width: 1200px;
             }
+
+            .active_link {
+                background-color: darkseagreen;
+                padding: 10px 10px;
+                border-radius: 20px;
+                text-decoration: none;
+                color: white
+            }
         </style>
 
         <div class="h-100  sidebar align-items-stretch  navbar navbar-dark bg-dark ">
             <div class="nav flex-column w-100  nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <div class="w-100 d-flex bg-black flex-row text-white align-items-end">
-                    <img src="images\logo.png" class="img-container w-25">
+                <div class="w-100 d-flex bg-dark flex-row text-white align-items-center">
+                    <img src="images/kulg.jpg" class="img-container w-25">
                     <h3 class="fw-bold w-100 text-center">School Panel</h3>
                 </div>
                 <div class="px-2 w-100 align-items-center d-flex mb-2">
@@ -91,16 +103,16 @@
                 }
                 ?>
                 <a href="lecturers.php " class=" nav-link"><i class="fas fa-chalkboard-teacher me-1"></i>Lecturers</a>
-                <a href="courses.php" class="active nav-link"><i class="fas fa-book-reader me-1"></i>Courses</a>
+                <a href="courses.php" class="active_link mx-2"><i class="fas fa-book-reader me-1"></i>Courses</a>
                 <a href="settings.php" class=" nav-link"><i class="fa fa-cog me-1"></i>Settings</a>
-                <button type="button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-danger my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Log out
                 </button>
             </div>
         </div>
         <div class="right">
-            <div class="bg-light d-flex justify-content-between px-3 py-4 text-black">
-                <h4>Courses</h4>
+            <div class="bg_top d-flex justify-content-between px-3 py-4 text-black">
+                <h3 class=" text-white" style=" font-family:Georgia, 'Times New Roman', Times, serif"><i class="fas fa-book-reader me-1"></i>Courses</h3>
                 <?php
                 if ($_SESSION['title'] == 'admin') {
                 ?>

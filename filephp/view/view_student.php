@@ -37,7 +37,7 @@
 
 
     <div class="border  container mx-auto rounded p-5">
-        <h1 class="text-center mb-5">Student profile</h1>
+        <h1 class="text-center mb-5 text-success fw-bold">Student profile</h1>
         <div class="d-flex">
             <div class=" w-25" style=" height:50%;">
                 <?php
@@ -58,25 +58,61 @@
                 </form>
             </div>
             <div class="w-75 border p-3 rounded-3 ms-3">
-                <p class="p-0 m-1"><span class="fw-bold ">Student name:</span>
-                    <?php echo $row_student['student_name'] ?></p>
-                <p class="p-0 m-1"><span class="fw-bold ">Student id:</span>
-                    <?php echo $row_student['student_id'] ?></p>
-                <p class="p-0 m-1"><span class="fw-bold ">Dep name:</span>
-                    <?php echo $row_dep['dep_name'] ?></p>
-                <p class="p-0 m-1"><span class="fw-bold ">Year:</span>
-                    <?php echo $row_student['year'] ?></p>
-                <p class="p-0 m-1"><span class="fw-bold ">Semester:</span>
-                    <?php echo $row_student['semester'] ?></p>
-                <p class="p-0 m-1"><span class="fw-bold ">Gender:</span>
-                    <?php echo $row_student['gender'] ?></p>
-                <p class="p-0 m-1"><span class="fw-bold ">DOB:</span>
-                    <?php echo $row_student['dob'] ?></p>
-                <p class="p-0 m-1"><span class="fw-bold ">Contact:</span>
-                    <?php echo $row_student['contact'] ?></p>
-                <p class="p-0 m-1"><span class="fw-bold ">Date joined:</span>
-                    <?php echo $row_student['date_joined'] ?></p>
-
+                <table class="table" style="max-width:500px">
+                    <tr class="p-0 m-1">
+                        <td style="border:none"><span class="fw-bold ">Student name:</td>
+                        <td style="border:none"></span>
+                            <?php echo $row_student['student_name'] ?>
+                        </td>
+                    </tr>
+                    <tr class="p-0 m-1">
+                        <td style="border:none"><span class="fw-bold ">Student id:</span></td>
+                        <td style="border:none">
+                            <?php echo $row_student['student_id'] ?>
+                        </td>
+                    </tr>
+                    <tr class="p-0 m-1">
+                        <td style="border:none"><span class="fw-bold ">Dep name:</span></td>
+                        <td style="border:none">
+                            <?php echo $row_dep['dep_name'] ?></td>
+                    </tr>
+                    <tr class="p-0 m-1">
+                        <td style="border:none"><span class="fw-bold ">Year:</span></td>
+                        <td style="border:none">
+                            <?php echo $row_student['year'] ?>
+                        </td>
+                    </tr>
+                    <tr class="p-0 m-1">
+                        <td style="border:none"><span class="fw-bold ">Semester:</span></td>
+                        <td style="border:none">
+                            <?php echo $row_student['semester'] ?>
+                        </td>
+                    </tr>
+                    <tr class="p-0 m-1">
+                        <td style="border:none"><span class="fw-bold ">Gender:</span></td>
+                        <td style="border:none">
+                            <?php echo $row_student['gender'] ?>
+                        </td>
+                    </tr>
+                    <tr class="p-0 m-1">
+                        <td style="border:none"><span class="fw-bold ">DOB:</span></td>
+                        <td style="border:none">
+                            <?php echo $row_student['dob'] ?>
+                        </td>
+                    </tr>
+                    <tr class="p-0 m-1">
+                        <td style="border:none"><span class="fw-bold ">Contact:</span></td>
+                        <td style="border:none">
+                            <?php echo $row_student['contact'] ?>
+                        </td>
+                    </tr>
+                    <tr class="p-0 m-1">
+                        <td style="border:none"><span class="fw-bold ">Date joined:</span></td>
+                        <td style="border:none">
+                            <?php echo $row_student['date_joined'] ?>
+                        </td>
+                    </tr>
+                </table>
 
             </div>
         </div>
@@ -87,6 +123,7 @@
         <div class=" d-flex gap-2 w-100 justify-content-end mt-2">
             <button onclick="window.print()" class="btn btn-lg btn-success">Print</button>
             <button onclick=location.href="view_result.php?id=<?php echo $_GET['id']; ?>" class="btn btn-lg btn-primary">View Result</button>
+            <a href="../actions/reset_pwd.php?id=<?php echo $_GET['id'] ?>" class="btn btn-lg btn-warning text-white">Reset Password</a>
             <button onclick="location.href='students.php'" class="btn btn-lg btn-secondary">Cancel</button>
         </div>
     </div>

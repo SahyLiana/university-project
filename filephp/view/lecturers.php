@@ -19,6 +19,10 @@
         // }
         ?>
         <style>
+            .right .bg_top {
+                background-color: darkseagreen;
+            }
+
             .sidebar {
                 position: fixed;
                 top: 0;
@@ -41,11 +45,19 @@
             .cont {
                 max-width: 1200px;
             }
+
+            .active_link {
+                background-color: darkseagreen;
+                padding: 10px 10px;
+                border-radius: 20px;
+                text-decoration: none;
+                color: white
+            }
         </style>
         <div class="h-100  sidebar align-items-stretch  navbar navbar-dark bg-dark ">
             <div class="nav flex-column w-100  nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <div class="w-100 d-flex bg-black flex-row text-white align-items-end">
-                    <img src="images/logo.png" class="img-container w-25">
+                <div class="w-100 d-flex bg-dark flex-row text-white align-items-center">
+                    <img src="images/kulg.jpg" class="img-container w-25">
                     <h3 class="fw-bold w-100 text-center">School Panel</h3>
                 </div>
                 <div class="px-2 w-100 align-items-center d-flex mb-2">
@@ -71,17 +83,17 @@
                 <?php
                 }
                 ?>
-                <a href="lecturers.php " class=" active nav-link"><i class="fas fa-chalkboard-teacher me-1"></i>Lecturers</a>
+                <a href="lecturers.php " class=" active_link mx-2"><i class="fas fa-chalkboard-teacher me-1"></i>Lecturers</a>
                 <a href="courses.php" class=" nav-link"><i class="fas fa-book-reader me-1"></i>Courses</a>
                 <a href="settings.php" class=" nav-link"><i class="fa fa-cog me-1"></i>Settings</a>
-                <button type="button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-danger my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Log out
                 </button>
             </div>
         </div>
         <div class="right">
-            <div class="bg-light px-3 d-flex justify-content-between py-4">
-                <h4 class="left me-auto  text-black">Lecturers:<span class="h3 text-primary fw-bold">
+            <div class="bg_top px-3 d-flex justify-content-between py-4">
+                <h3 style=" font-family:Georgia, 'Times New Roman', Times, serif" class="left me-auto  text-white"><i class="fas fa-chalkboard-teacher me-1"></i>Lecturers:<span class="h3 text-primary fw-bold">
                         <?php
                         if ($_SESSION['title'] == 'admin') {
                             $query_count = mysqli_query($conn, "Select COUNT(lecturer_id) as num_lec from lecturers;");
@@ -89,7 +101,7 @@
                             echo $row_num_lec['num_lec'];
                         }
                         ?>
-                    </span></h4>
+                    </span></h3>
                 <?php
                 if ($_SESSION['title'] == 'admin') {
                 ?>

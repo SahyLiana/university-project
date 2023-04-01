@@ -12,15 +12,19 @@
         .bg-input {
             background-color: rgba(255, 255, 255, 0.2);
         }
+
+        .university {
+            font-family: Georgia, serif;
+        }
     </style>
 </head>
 
 
-<body class=" d-flex justify-content-center align-items-center" style=" background-image: url('images/bg-body.png');">
+<body class=" d-flex justify-content-center align-items-center" style=" background-image: url('images/bg-body.png'); background-repeat:no-repeat; background-attachment:fixed;background-size:cover">
     <div style="border-top:aqua solid 1px; border-bottom:aqua solid 1px" class="small-box bg-panel my-auto text-white px-5 rounded-5 py-3 ">
         <div class=" text-center m-5">
             <img class="w-50 rounded img-thumbnail img-fluid" src="images/kulg.jpg" />
-            <h2 class="mt-2 fw-bolder">KAMPALA UNIVERSITY</h2>
+            <h2 class="mt-2 fw-bolder university">KAMPALA UNIVERSITY</h2>
             <p class=" text-white-50">Control panel login</p>
         </div>
         <form action="" method="POST">

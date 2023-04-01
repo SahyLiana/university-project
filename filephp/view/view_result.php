@@ -31,16 +31,29 @@
     $fetchDptData = mysqli_fetch_assoc($queryCheckDpt);
 
 
+
     ?>
 
 
     <div class="container rounded p-4 shadow-sm">
-        <div class="">
-            <p>Student Name: <span class="fw-bold"><?php echo $fetchStdData['student_name'] ?></span></p>
-            <p>Student ID: <span class="fw-bold"><?php echo $fetchStdData['student_id'] ?></span></p>
-            <p>Department Name: <span class="fw-bold"><?php echo $fetchDptData['dep_name'] ?></span></p>
-            <p>Gender: <span class="fw-bold"><?php echo $fetchStdData['gender'] ?></span></p>
-        </div>
+        <table class="table" style="max-width:400px">
+            <tr>
+                <td style="border:none">Student Name:</td>
+                <td style="border:none"> <span class="fw-bold fs-6"><?php echo $fetchStdData['student_name'] ?></span></td>
+            </tr>
+            <tr>
+                <td style="border:none">Student ID:</td>
+                <td style="border:none"> <span class="fw-bold fs-6"><?php echo $fetchStdData['student_id'] ?></span></td>
+            </tr>
+            <tr>
+                <td style="border:none">Department Name:</td>
+                <td style="border:none"> <span class="fw-bold fs-6"><?php echo $fetchDptData['dep_name'] ?></span></td>
+            </tr>
+            <tr>
+                <td style="border:none">Gender:</td>
+                <td style="border:none"> <span class="fw-bold fs-6"><?php echo $fetchStdData['gender'] ?></span></td>
+            </tr>
+        </table>
 
         <div class="">
             <table class="table table-bordered table-striped table-hover table-responsive">
@@ -57,6 +70,7 @@
                 </thead>
                 <tbody>
                     <?php
+                    // if ($_SESSION['title'] == 'admin') {
                     $total_i = 0;
                     $cgpa = 0;
                     $total_gp = 0;
@@ -68,155 +82,331 @@
                             for ($s = 1; $s <= 2; $s++) {
                                 // $queryRegisterSemester = null;
                                 //if ($_SESSION['title'] == 'admin') {
-                                $queryRegisterSemester = mysqli_query($conn, "Select *from register WHERE student_id='$stdId' AND year='$y' AND semester='$s'");
-                                //}else if($_SESSION['title']=='lecturer'){
-                                //    $queryRegisterSemester = mysqli_query($conn, "Select *from register WHERE student_id='$stdId' AND year='$y' AND semester='$s'");
-                                //  }
 
-                                $rowCheckRegisterSemester = $queryRegisterSemester->num_rows;
-                                if ($rowCheckRegisterSemester > 0) {
-                                    echo "<tr><td colspan='9' class='text-primary fw-bold py-3'>Year " . $y . " Semester " . $s . "</td></tr>";
-                                    $gpa = 0.0;
-                                    $tgp = 0;
-                                    $i = 0;
-                                    while ($rowFetch = mysqli_fetch_assoc($queryRegisterSemester)) {
-                                        $gp = null;
 
+                                if ($_SESSION['title'] == 'lecturer') {
+                                    $lec_id = $_SESSION['userid'];
+                                    $queryLecName = mysqli_query($conn, "Select *from lecturers where lecturer_id='$lec_id'");
+                                    $rowLec = mysqli_fetch_assoc($queryLecName);
+                                    $lecName = $rowLec['lecturer_name'];
+
+                                    $queryCourses = mysqli_query($conn, "Select *from courses WHERE lecturer='$lecName' AND year='$y' AND semester='$s' AND dep_id='$departmentId'");
+
+                                    $numCoursesRows = $queryCourses->num_rows;
+                                    //echo $numCoursesRows;
+                                    if ($numCoursesRows > 0) {
+                                        echo "<tr><td colspan='9' class='text-primary fw-bold py-3'>Year " . $y . " Semester " . $s . "</td></tr>";
+                                        while ($rowCourseTaught = mysqli_fetch_assoc($queryCourses)) {
+                                            // echo "Test";
+                                            $cuid = $rowCourseTaught['course_id'];
+                                            $queryRegisterSemester = mysqli_query($conn, "Select *from register WHERE student_id='$stdId' AND year='$y' AND semester='$s' AND cu_id='$cuid'");
+
+                                            $numCourseRegister = $queryRegisterSemester->num_rows;
+                                            if ($numCourseRegister > 0) {
+
+                                                $gpa = 0.0;
+                                                $tgp = 0;
+                                                $i = 0;
+                                                while ($rowFetch = mysqli_fetch_assoc($queryRegisterSemester)) {
+                                                    // echo "Test";
+                                                    $gp = null;
+
+                                                    echo $rowFetch['cu_id'];
+                                                    //////////////////////////////////
                     ?>
-                                        <tr>
-                                            <td><?php echo $rowFetch['cu_id'];
-                                                $cuid = $rowFetch['cu_id']; ?></td>
-                                            <td><?php $queryCourses = mysqli_query($conn, "Select *from courses where course_id='$cuid';");
-                                                $rowCourses = mysqli_fetch_assoc($queryCourses);
-                                                echo $rowCourses['course_name']; ?></td>
-                                            <td><?php
-                                                $examMarks = $rowFetch['exam_marks'];
-                                                if (empty($examMarks)) {
-                                                    echo "None";
-                                                } else {
-                                                    echo $examMarks;
-                                                }
-                                                ?></td>
-                                            <td><?php
-                                                $courseworkMarks = $rowFetch['coursework'];
-                                                if (empty($courseworkMarks)) {
-                                                    echo "None";
-                                                } else {
-                                                    echo $courseworkMarks;
-                                                }
-                                                ?></td>
-                                            <td><?php
+                                                    <tr>
+                                                        <td><?php echo $rowFetch['cu_id'];
+                                                            $cuid = $rowFetch['cu_id']; ?></td>
+                                                        <td><?php $queryCourseUnits = mysqli_query($conn, "Select *from courses where course_id='$cuid';");
+                                                            $rowCourses = mysqli_fetch_assoc($queryCourseUnits);
+                                                            echo $rowCourses['course_name']; ?></td>
+                                                        <td><?php
+                                                            $examMarks = $rowFetch['exam_marks'];
+                                                            if (empty($examMarks)) {
+                                                                echo "None";
+                                                            } else {
+                                                                echo $examMarks;
+                                                            }
+                                                            ?></td>
+                                                        <td><?php
+                                                            $courseworkMarks = $rowFetch['coursework'];
+                                                            if (empty($courseworkMarks)) {
+                                                                echo "None";
+                                                            } else {
+                                                                echo $courseworkMarks;
+                                                            }
+                                                            ?></td>
+                                                        <td><?php
 
-                                                $total = 0;
-                                                $status = $rowFetch['status'];
-                                                if ($status == 'transfer') {
-                                                    if ($rowFetch['total'] == null) {
-                                                        echo "None";
-                                                    } else {
-                                                        echo $rowFetch['total'];
-                                                    }
-                                                } else {
-                                                    if (empty($examMarks) && empty($courseworkMarks)) {
-                                                        echo "None";
-                                                    } else {
-                                                        $total = ceil(floatval(($examMarks) * 0.7 + $courseworkMarks));
-                                                        // $t = floatval($total);
-                                                        $queryUpdateTotal = mysqli_query($conn, "Update register set total=$total  WHERE student_id='$stdId' and cu_id='$cuid'");
-                                                        echo $total;
-                                                        $i = $i + 1;
-                                                        $total_i = $total_i + 1;
-                                                        // echo $i;
-                                                    }
-                                                }
+                                                            $total = 0;
+                                                            $status = $rowFetch['status'];
+                                                            if ($status == 'transfer') {
+                                                                if ($rowFetch['total'] == null) {
+                                                                    echo "None";
+                                                                } else {
+                                                                    echo $rowFetch['total'];
+                                                                }
+                                                            } else {
+                                                                if (empty($examMarks) && empty($courseworkMarks)) {
+                                                                    echo "None";
+                                                                } else {
+                                                                    $total = ceil(floatval(($examMarks) * 0.7 + $courseworkMarks));
+                                                                    // $t = floatval($total);
+                                                                    $queryUpdateTotal = mysqli_query($conn, "Update register set total=$total  WHERE student_id='$stdId' and cu_id='$cuid'");
+                                                                    echo $total;
+                                                                    $i = $i + 1;
+                                                                    $total_i = $total_i + 1;
+                                                                    // echo $i;
+                                                                }
+                                                            }
 
-                                                ?></td>
-                                            <td><?php
-                                                if ($total != 0) {
+                                                            ?></td>
+                                                        <td><?php
+                                                            if ($total != 0) {
 
-                                                    $grade = null;
-                                                    if ($total < 50) {
-                                                        $grade = 'Fail';
-                                                        if ($total < 40) {
-                                                            $gp = 0;
-                                                        } else if ($total < 45) {
-                                                            $gp = 1.0;
-                                                        } else {
-                                                            $gp = 1.5;
-                                                        }
-                                                    } else {
-                                                        if ($total >= 80) {
-                                                            $grade = 'A';
-                                                            $gp = 5;
-                                                        } else if ($total >= 75) {
-                                                            $grade = 'B+';
-                                                            $gp = 4.5;
-                                                        } else if ($total >= 70) {
-                                                            $grade = 'B';
-                                                            $gp = 4.0;
-                                                        } else if ($total >= 65) {
-                                                            $grade = 'B-';
-                                                            $gp = 3.5;
-                                                        } else if ($total >= 60) {
-                                                            $grade = 'C+';
-                                                            $gp = 3.0;
-                                                        } else if ($total >= 55) {
-                                                            $grade = 'C';
-                                                            $gp = 2.5;
-                                                        } else if ($total >= 50) {
-                                                            $grade = 'C-';
-                                                            $gp = 2.0;
-                                                        }
-                                                    }
-                                                    $queryRegisterUpdate = mysqli_query($conn, "Update register set grade='$grade',gp=$gp where cu_id='$cuid' AND student_id='$stdId'");
-                                                    echo $grade;
-                                                } else {
-                                                    echo "None";
-                                                }
+                                                                $grade = null;
+                                                                if ($total < 50) {
+                                                                    $grade = 'Fail';
+                                                                    if ($total < 40) {
+                                                                        $gp = 0;
+                                                                    } else if ($total < 45) {
+                                                                        $gp = 1.0;
+                                                                    } else {
+                                                                        $gp = 1.5;
+                                                                    }
+                                                                } else {
+                                                                    if ($total >= 80) {
+                                                                        $grade = 'A';
+                                                                        $gp = 5;
+                                                                    } else if ($total >= 75) {
+                                                                        $grade = 'B+';
+                                                                        $gp = 4.5;
+                                                                    } else if ($total >= 70) {
+                                                                        $grade = 'B';
+                                                                        $gp = 4.0;
+                                                                    } else if ($total >= 65) {
+                                                                        $grade = 'B-';
+                                                                        $gp = 3.5;
+                                                                    } else if ($total >= 60) {
+                                                                        $grade = 'C+';
+                                                                        $gp = 3.0;
+                                                                    } else if ($total >= 55) {
+                                                                        $grade = 'C';
+                                                                        $gp = 2.5;
+                                                                    } else if ($total >= 50) {
+                                                                        $grade = 'C-';
+                                                                        $gp = 2.0;
+                                                                    }
+                                                                }
+                                                                $queryRegisterUpdate = mysqli_query($conn, "Update register set grade='$grade',gp=$gp where cu_id='$cuid' AND student_id='$stdId'");
+                                                                echo $grade;
+                                                            } else {
+                                                                echo "None";
+                                                            }
 
-                                                ?></td>
-                                            <td><?php echo $gp;
-                                                if ($gp != null) {
-                                                    $tgp = $tgp + $gp * 4;
-                                                    $total_gp = $total_gp + $gp * 4;
-                                                    $cgpa = $total_gp / ($total_i * 4.0);
-                                                    $gpa = $tgp / ($i * 4.0);
+                                                            ?></td>
+                                                        <td><?php echo $gp;
+                                                            if ($gp != null) {
+                                                                $tgp = $tgp + $gp * 4;
+                                                                $total_gp = $total_gp + $gp * 4;
+                                                                $cgpa = $total_gp / ($total_i * 4.0);
+                                                                $gpa = $tgp / ($i * 4.0);
+                                                            }
+                                                            // $gpa = ($gpa + ($gp * 4)) / ($i * 4.0);
+                                                            // echo $gpa; 
+                                                            ?>
+                                                        </td>
+                                                        <td><?php if ($rowFetch['status'] == 'retake') {
+                                                                if ($rowFetch['grade'] != 'Fail') {
+                                                                    $queryRegisterUpdate = mysqli_query($conn, "Update register set remarks='Pass after retake',registration_key=null where cu_id='$cuid' AND student_id='$stdId'");
+                                                                    echo "Pass after retake";
+                                                                } else if ($rowFetch['grade'] == 'Fail') {
+                                                                    echo $rowFetch['remarks'];
+                                                                }
+                                                            } else if ($rowFetch['status'] == 'normal' && $total < 50 && !empty($total)) {
+                                                                $queryRegisterUpdate = mysqli_query($conn, "Update register set remarks='retake',registration_key=null where cu_id='$cuid' AND student_id='$stdId'");
+                                                                echo "Retake";
+                                                            } else if ($rowFetch['status'] == 'normal' || $rowFetch['status'] == 'retake') {
+                                                                echo $rowFetch['remarks'];
+                                                            }
+                                                            ?></td>
+                                                        <td><a class="btn btn-success" href="input_result.php?stdId=<?php echo $stdId ?>&cu_id=<?php echo $rowFetch['cu_id'] ?>">Input</a></td>
+                                                    </tr>
+
+                                                <?php
+
                                                 }
-                                                // $gpa = ($gpa + ($gp * 4)) / ($i * 4.0);
-                                                // echo $gpa; 
                                                 ?>
-                                            </td>
-                                            <td><?php if ($rowFetch['status'] == 'retake') {
-                                                    if ($rowFetch['grade'] != 'Fail') {
-                                                        $queryRegisterUpdate = mysqli_query($conn, "Update register set remarks='Pass after retake' where cu_id='$cuid' AND student_id='$stdId'");
-                                                        echo "Pass after retake";
-                                                    } else if ($rowFetch['grade'] == 'Fail') {
+                                            <?php
+                                                // }
+                                            }
+                                        }
+                                    }
+                                } else if ($_SESSION['title'] == 'admin') {
+                                    $queryRegisterSemester = mysqli_query($conn, "Select *from register WHERE student_id='$stdId' AND year='$y' AND semester='$s'");
+                                    //}else if($_SESSION['title']=='lecturer'){
+                                    //    $queryRegisterSemester = mysqli_query($conn, "Select *from register WHERE student_id='$stdId' AND year='$y' AND semester='$s'");
+                                    //  }
+
+                                    $rowCheckRegisterSemester = $queryRegisterSemester->num_rows;
+                                    if ($rowCheckRegisterSemester > 0) {
+                                        echo "<tr><td colspan='9' class='text-primary fw-bold py-3'>Year " . $y . " Semester " . $s . "</td></tr>";
+                                        $gpa = 0.0;
+                                        $tgp = 0;
+                                        $i = 0;
+                                        while ($rowFetch = mysqli_fetch_assoc($queryRegisterSemester)) {
+                                            $gp = null;
+
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $rowFetch['cu_id'];
+                                                    $cuid = $rowFetch['cu_id']; ?></td>
+                                                <td><?php $queryCourses = mysqli_query($conn, "Select *from courses where course_id='$cuid';");
+                                                    $rowCourses = mysqli_fetch_assoc($queryCourses);
+                                                    echo $rowCourses['course_name']; ?></td>
+                                                <td><?php
+                                                    $examMarks = $rowFetch['exam_marks'];
+                                                    if (empty($examMarks)) {
+                                                        echo "None";
+                                                    } else {
+                                                        echo $examMarks;
+                                                    }
+                                                    ?></td>
+                                                <td><?php
+                                                    $courseworkMarks = $rowFetch['coursework'];
+                                                    if (empty($courseworkMarks)) {
+                                                        echo "None";
+                                                    } else {
+                                                        echo $courseworkMarks;
+                                                    }
+                                                    ?></td>
+                                                <td><?php
+
+                                                    $total = 0;
+                                                    $status = $rowFetch['status'];
+                                                    if ($status == 'transfer') {
+                                                        if ($rowFetch['total'] == null) {
+                                                            echo "None";
+                                                        } else {
+                                                            echo $rowFetch['total'];
+                                                        }
+                                                    } else {
+                                                        if (empty($examMarks) && empty($courseworkMarks)) {
+                                                            echo "None";
+                                                        } else {
+                                                            $total = ceil(floatval(($examMarks) * 0.7 + $courseworkMarks));
+                                                            // $t = floatval($total);
+                                                            $queryUpdateTotal = mysqli_query($conn, "Update register set total=$total  WHERE student_id='$stdId' and cu_id='$cuid'");
+                                                            echo $total;
+                                                            $i = $i + 1;
+                                                            $total_i = $total_i + 1;
+                                                            // echo $i;
+                                                        }
+                                                    }
+
+                                                    ?></td>
+                                                <td><?php
+                                                    if ($total != 0) {
+
+                                                        $grade = null;
+                                                        if ($total < 50) {
+                                                            $grade = 'Fail';
+                                                            if ($total < 40) {
+                                                                $gp = 0;
+                                                            } else if ($total < 45) {
+                                                                $gp = 1.0;
+                                                            } else {
+                                                                $gp = 1.5;
+                                                            }
+                                                        } else {
+                                                            if ($total >= 80) {
+                                                                $grade = 'A';
+                                                                $gp = 5;
+                                                            } else if ($total >= 75) {
+                                                                $grade = 'B+';
+                                                                $gp = 4.5;
+                                                            } else if ($total >= 70) {
+                                                                $grade = 'B';
+                                                                $gp = 4.0;
+                                                            } else if ($total >= 65) {
+                                                                $grade = 'B-';
+                                                                $gp = 3.5;
+                                                            } else if ($total >= 60) {
+                                                                $grade = 'C+';
+                                                                $gp = 3.0;
+                                                            } else if ($total >= 55) {
+                                                                $grade = 'C';
+                                                                $gp = 2.5;
+                                                            } else if ($total >= 50) {
+                                                                $grade = 'C-';
+                                                                $gp = 2.0;
+                                                            }
+                                                        }
+                                                        $queryRegisterUpdate = mysqli_query($conn, "Update register set grade='$grade',gp=$gp where cu_id='$cuid' AND student_id='$stdId'");
+                                                        echo $grade;
+                                                    } else {
+                                                        echo "None";
+                                                    }
+
+                                                    ?></td>
+                                                <td><?php echo $gp;
+                                                    if ($gp != null) {
+                                                        $tgp = $tgp + $gp * 4;
+                                                        $total_gp = $total_gp + $gp * 4;
+                                                        $cgpa = $total_gp / ($total_i * 4.0);
+                                                        $gpa = $tgp / ($i * 4.0);
+                                                    }
+                                                    // $gpa = ($gpa + ($gp * 4)) / ($i * 4.0);
+                                                    // echo $gpa; 
+                                                    ?>
+                                                </td>
+                                                <td><?php if ($rowFetch['status'] == 'retake') {
+                                                        if ($rowFetch['grade'] != 'Fail') {
+                                                            $queryRegisterUpdate = mysqli_query($conn, "Update register set remarks='Paper retaken' where cu_id='$cuid' AND student_id='$stdId'");
+                                                            echo "Paper retaken";
+                                                        } else if ($rowFetch['grade'] == 'Fail') {
+                                                            $queryRegisterUpdate = mysqli_query($conn, "Update register set remarks='retake',registration_key= null where cu_id='$cuid' AND student_id='$stdId'");
+                                                            echo $rowFetch['remarks'];
+                                                        }
+                                                    } else if ($rowFetch['status'] == 'normal' && $total < 50 && !empty($total)) {
+                                                        $queryRegisterUpdate = mysqli_query($conn, "Update register set remarks='retake',registration_key=null where cu_id='$cuid' AND student_id='$stdId'");
+                                                        echo "Retake";
+                                                    } else if ($rowFetch['status'] == 'normal' || $rowFetch['status'] == 'retake') {
                                                         echo $rowFetch['remarks'];
                                                     }
-                                                } else if ($rowFetch['status'] == 'normal' && $total < 50 && !empty($total)) {
-                                                    $queryRegisterUpdate = mysqli_query($conn, "Update register set remarks='retake' where cu_id='$cuid' AND student_id='$stdId'");
-                                                    echo "Retake";
-                                                } else if ($rowFetch['status'] == 'normal' || $rowFetch['status'] == 'retake') {
-                                                    echo $rowFetch['remarks'];
-                                                }
-                                                ?></td>
-                                            <td><a class="btn btn-success" href="input_result.php?stdId=<?php echo $stdId ?>&cu_id=<?php echo $rowFetch['cu_id'] ?>">Input</a></td>
-                                        </tr>
+                                                    ?></td>
+                                                <td><a class="btn btn-success" href="input_result.php?stdId=<?php echo $stdId ?>&cu_id=<?php echo $rowFetch['cu_id'] ?>">Input</a></td>
+                                            </tr>
 
-                                    <?php
+                                        <?php
 
+                                        }
+                                        ?>
+                                        <?php if ($_SESSION['title'] == 'admin') {
+
+                                        ?>
+                                            <tr>
+                                                <td colspan="9"><?php
+                                                                echo "GPA:" . number_format($gpa, 2, '.', '') ?><span style="float:right;" class="">CGPA:<?php echo number_format($cgpa, 2, '.', '') ?></span>
+                                <?php
+                                        }
                                     }
-                                    ?>
-                                    <tr>
-                                        <td colspan="9"><?php
-                                                        echo "GPA:" . $gpa ?><span style="float:right;" class="">CGPA:<?php echo number_format($cgpa, 2, '.', '') ?></span>
-                                <?php }
+                                }
                             }
                         } ?></td>
-                                    </tr><?php
-                                        }
-                                            ?>
+                                            </tr><?php
+                                                }
+                                                    ?>
 
                 </tbody>
+                <!-- <?php
+                        //  }
+                        // else if ($_SESSION['title'] == 'lecturer') {
+                        //     echo $_GET['cuid'];
+                        // } else {
+                        //     header('location:admin.php');
+                        // } 
+                        ?> -->
             </table>
             <div class="mt-3 d-flex justify-content-end">
                 <button class="btn btn-secondary" onclick="window.location.href=' students.php'">Back</button>

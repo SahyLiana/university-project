@@ -5,6 +5,10 @@
 
 <body>
     <style>
+        .right .bg_top {
+            background-color: darkseagreen;
+        }
+
         .sidebar {
             position: fixed;
             top: 0;
@@ -26,6 +30,14 @@
         .cont {
             max-width: 1200px;
         }
+
+        .active_link {
+            background-color: darkseagreen;
+            padding: 10px 10px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white
+        }
     </style>
     <?php require('../config/config.php');
     if (!isset($_SESSION['username']) && !isset($_SESSION['title'])) {
@@ -43,8 +55,8 @@
         ?>
         <div class="h-100 sidebar align-items-stretch  navbar navbar-dark bg-dark ">
             <div class="nav flex-column w-100  nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <div class="w-100 d-flex bg-black flex-row text-white align-items-end">
-                    <img src="images/logo.png" class="img-container w-25">
+                <div class="w-100 d-flex bg-dark flex-row text-white align-items-center">
+                    <img src="images/kulg.jpg" class="img-container w-25">
                     <h3 class="fw-bold w-100 text-center">School Panel</h3>
                 </div>
                 <div class="px-2 w-100 align-items-center d-flex mb-2">
@@ -66,21 +78,21 @@
                 ?>
                 <?php
                 if ($_SESSION['title'] == 'student') { ?>
-                    <a href="exam_registration.php" class="active nav-link"><i class=" fa fa-registered me-1"></i>Register for exam</a>
+                    <a href="exam_registration.php" class="active_link mx-2"><i class=" fa fa-registered me-1"></i>Register for exam</a>
                 <?php
                 }
                 ?>
                 <a href="lecturers.php" class=" nav-link"><i class="fas fa-chalkboard-teacher me-1"></i>Lecturers</a>
                 <a href="courses.php" class=" nav-link"><i class="fas fa-book-reader me-1"></i>Courses</a>
                 <a href="settings.php" class=" nav-link"><i class="fa fa-cog me-1"></i>Settings</a>
-                <button type="button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-danger my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Log out
                 </button>
             </div>
         </div>
         <div class="right">
-            <div class="bg-light d-flex flex-row justify-content-between py-4 px-3 ">
-                <h4 class=" text-black">Registration</h4>
+            <div class="bg_top d-flex flex-row justify-content-between py-4 px-3 ">
+                <h4 class=" text-white"><i class=" fa fa-registered me-1"></i>Registration</h4>
                 <a class="btn btn-success " href="myRegistration.php?id=<?php echo $_SESSION['userid'] ?>">View my Registration</a>
             </div>
             <div class="px-3 py-5">
@@ -117,7 +129,18 @@
                     <div class="d-flex border-top-1 p-3 flex-row justify-content-end">
 
                         <div class="d-flex gap-2">
-                            <button class="btn btn-primary" name="register">Register</button>
+                            <?php
+                            $stdId = $_SESSION['userid'];
+                            $queryCheckRegistrationAccount = mysqli_query($conn, "Select *from register where student_id='$stdId'");
+                            $queryFecthAccountStatus = mysqli_fetch_assoc($queryCheckRegistrationAccount);
+                            //echo $queryFecthAccountStatus['enable_registration'];
+
+                            ?>
+                            <button class="btn btn-primary" <?php
+                                                            if ($queryFecthAccountStatus['enable_registration'] == 'no') {
+                                                                echo "disabled";
+                                                            }
+                                                            ?> name="register">Register</button>
                         </div>
                     </div>
                     <?php

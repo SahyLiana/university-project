@@ -3,9 +3,23 @@
   <head>
     <script src="alert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+      .mytextwithicon {
+        position: relative;
+      }
+      .mytextwithicon:before {
+        content: "\f005"; /* this is your text. You can also use UTF-8 character codes as I do here */
+        font-family: Font Awesome 5 free;
+        left: -5px;
+        font-size: 50px;
+        position: absolute;
+        top: 0;
+      }
+    </style>
   </head>
   <body>
-    <form
+    <div class="mytextwithicon">Test with icon</div>
+    <!-- <form
       method="POST"
       action="do-something.php"
       onsubmit="return submitForm(this);"
@@ -62,6 +76,10 @@
         }
       }
     </script>
-    <a href="go.html" onclick="submitForms()">Test</a>
+    <a href="go.html" onclick="submitForms()">Test</a> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </body>
 </html>

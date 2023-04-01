@@ -1,5 +1,5 @@
 <?php
-require('../config/config.php');
+require_once('../config/config.php');
 if (!isset($_SESSION['username'])) {
     header('location:../view/admin.php');
 } else if ($_SESSION['title'] != 'admin') {

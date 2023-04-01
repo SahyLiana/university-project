@@ -10,7 +10,7 @@
         header('location:../view/admin.php');
     }
     if ($_SESSION['title'] != 'admin') {
-        header('location:../view/admin.php');
+        header('location:../view/admin.php'); 
     }
     //else {
     //     echo "Update";

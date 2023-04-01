@@ -24,13 +24,26 @@
 
 
     <div class="container rounded p-4 shadow-sm">
-        <div class="">
-            <p>Student Name: <span class="fw-bold"><?php echo $fetchStdData['student_name'] ?></span></p>
-            <p>Student ID: <span class="fw-bold"><?php echo $fetchStdData['student_id'] ?></span></p>
-            <p>Department Name: <span class="fw-bold"><?php echo $fetchDptData['dep_name'] ?></span></p>
-            <p>Gender: <span class="fw-bold"><?php echo $fetchStdData['gender'] ?></span></p>
-        </div>
-        <div class="">
+        <table class="table" style="max-width:400px">
+            <tr>
+                <td style="border:none">Student Name:</td>
+                <td style="border:none"> <span class="fw-bold"><?php echo $fetchStdData['student_name'] ?></span></td>
+                </td>
+            <tr>
+                <td style="border:none">Student ID:</td>
+                <td style="border:none"> <span class="fw-bold"><?php echo $fetchStdData['student_id'] ?></span></td>
+            </tr>
+            <tr>
+                <td style="border:none">Department Name:</td>
+                <td style="border:none"> <span class="fw-bold"><?php echo $fetchDptData['dep_name'] ?></span></td>
+            </tr>
+            <tr>
+                <td style="border:none">Gender:</td>
+                <td style="border:none"> <span class="fw-bold"><?php echo $fetchStdData['gender'] ?></span></td>
+            </tr>
+        </table>
+        <h1 class="fw-bold" style="text-align:center;padding:5px;color:green;border-bottom:3px solid green">My Registration</h1>
+        <div class="mt-5">
             <table class="table table-bordered table-striped table-hover table-responsive">
                 <thead class="bg-dark text-bg-dark">
                     <th scope="col">Subject Code</th>

@@ -29,7 +29,7 @@
     if ($semester == 2) {
         $semdisplay = "Second";
     }
-    echo $id;
+    //echo $id;
     ?>
     <div class="container p-0 my-auto rounded shadow-sm">
         <div class="mb-3 bg-light justify-content-between d-flex px-3 py-5">
@@ -101,7 +101,7 @@
                     if ($rowCheckRegistration != 0) {
                         $fecthDataChecked = mysqli_fetch_assoc($queryCheckRegistration);
 
-                        if ($fecthDataChecked['exam_marks'] >= 50 && $fecthDataChecked['remarks'] != 'retake') {
+                        if ($fecthDataChecked['exam_marks'] >= 50) {
             ?>
                             <script>
                                 alert("You have been registered some of selected course unit,please check carefully");
@@ -109,7 +109,7 @@
                             </script>
                         <?php
                         } else if (($fecthDataChecked['exam_marks'] < 50 && $fecthDataChecked['exam_marks'] != null) || $fecthDataChecked['remarks'] == 'retake') {
-                            $query_update = mysqli_query($conn, "Update register set status='retake',academic_year='$academic_year' 
+                            $query_update = mysqli_query($conn, "Update register set status='retake',academic_year='$academic_year',registration_key='1' 
                             WHERE student_id='$id' AND cu_id='$course'");
                         }
                         ?>
@@ -117,11 +117,11 @@
 
                     } else {
                         if ($status == 'retake') {
-                            $query_insert = mysqli_query($conn, "Insert into register(student_id,cu_id,status,year,semester,date_registered,academic_year)
-                         values('$id','$course','normal','$year','$semester','$date','$academic_year')");
+                            $query_insert = mysqli_query($conn, "Insert into register(student_id,cu_id,status,year,semester,date_registered,academic_year,registration_key)
+                         values('$id','$course','normal','$year','$semester','$date','$academic_year','1')");
                         } else {
-                            $query_insert = mysqli_query($conn, "Insert into register(student_id,cu_id,status,year,semester,date_registered,academic_year)
-                         values('$id','$course','$status','$year','$semester','$date','$academic_year')");
+                            $query_insert = mysqli_query($conn, "Insert into register(student_id,cu_id,status,year,semester,date_registered,academic_year,registration_key)
+                         values('$id','$course','$status','$year','$semester','$date','$academic_year','1')");
 
                             if (!$query_insert) {
                                 // $i = 0;

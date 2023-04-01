@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
+        .right .bg_top {
+            background-color: darkseagreen;
+        }
+
         .card {
             /* transition: .5s; */
             border-radius: 20px;
@@ -18,6 +22,10 @@
         .card_violet,
         .card_violet .title .fa {
             background: linear-gradient(-45deg, #000, #9a4eff);
+        }
+
+        .bg-right {
+            background-color: whitesmoke;
         }
     </style>
 </head>
@@ -57,19 +65,27 @@
 } */
 
             .right {
-                width: 75%;
+                width: 100%;
                 margin-left: 25%;
             }
 
             .cont {
                 max-width: 1200px;
             }
+
+            .active_link {
+                background-color: darkseagreen;
+                padding: 10px 10px;
+                border-radius: 20px;
+                text-decoration: none;
+                color: white
+            }
         </style>
 
         <div class="h-100  sidebar align-items-stretch  navbar navbar-dark bg-dark ">
             <div class="nav flex-column w-100  nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <div class="w-100 d-flex bg-black flex-row text-white align-items-end">
-                    <img src="images/logo.png" class="img-container w-25">
+                <div class="w-100 d-flex bg-dark flex-row text-white align-items-center">
+                    <img src="images/kulg.jpg" class="img-container w-25">
                     <h3 class="fw-bold w-100 text-center">School Panel</h3>
                 </div>
                 <div class="px-2 w-100 align-items-center d-flex mb-2">
@@ -77,7 +93,7 @@
                     <p class="ps-2 pt-3  text-white-50"> Welcome <?php echo $_SESSION['username'] ?></p>
                 </div>
                 <a href="dashboard.php" class=" nav-link "><i class="fa fa-home me-1"></i>Home</a>
-                <a href="departments.php" class="active nav-link"><i class="fas fa-school me-1"></i>Departments</a>
+                <a href="departments.php" class="active_link mx-2"><i class="fas fa-school me-1"></i>Departments</a>
                 <?php
                 if ($_SESSION['title'] == 'admin' || $_SESSION['title'] == 'lecturer') {
                 ?><a href="students.php" class=" nav-link"><i class="fas fa-graduation-cap me-1"></i>Students</a>
@@ -87,35 +103,35 @@
                 <a href="lecturers.php" class=" nav-link"><i class="fas fa-chalkboard-teacher me-1"></i>Lecturers</a>
                 <a href="courses.php" class=" nav-link"><i class="fas fa-book-reader me-1"></i>Courses</a>
                 <a href="settings.php" class=" nav-link"><i class="fa fa-cog me-1"></i>Settings</a>
-                <button type="button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-danger my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Log out
                 </button>
 
             </div>
         </div>
         <div class="right  ">
-            <div class="bg-light px-3 d-flex justify-content-between  py-4">
-                <h4 class="left me-auto  text-black">Departements</h4>
+            <div class="bg_top px-3 d-flex justify-content-between  py-4">
+                <h3 style=" font-family: Georgia, 'Times New Roman', Times, serif;" class="left me-auto  text-white"><i class="fas fa-school me-1"></i>Departements</h3>
 
                 <input type="button" value="Add +" class="btn w-25 fw-bold btn-success rounded-pill " data-bs-toggle="modal" data-bs-target="#adddepartment">
             </div>
-            <div class="px-4 py-5"> <?php
-                                    if (isset($_POST['submit'])) {
-                                        $dpt_id = $_POST['dep_id'];
-                                        $dpt_name = $_POST['dep_name'];
-                                        if (!empty($dpt_id) && !empty($dpt_name)) {
-                                            $query = mysqli_query($conn, "insert into departments(dep_id,dep_name) values ('$dpt_id','$dpt_name');");
-                                            if ($query) {
-                                                echo "Added succussfull";
-                                            } else {
-                                                echo "Insert error";
-                                            }
-                                        } else {
-                                            echo "Empty input";
-                                        }
-                                    }
-                                    ?>
-                <div class="d-flex  w-100 flex-wrap px-3 gap-2">
+            <div class="px-4 py-5 bg-right"> <?php
+                                                if (isset($_POST['submit'])) {
+                                                    $dpt_id = $_POST['dep_id'];
+                                                    $dpt_name = $_POST['dep_name'];
+                                                    if (!empty($dpt_id) && !empty($dpt_name)) {
+                                                        $query = mysqli_query($conn, "insert into departments(dep_id,dep_name) values ('$dpt_id','$dpt_name');");
+                                                        if ($query) {
+                                                            echo "Added succussfull";
+                                                        } else {
+                                                            echo "Insert error";
+                                                        }
+                                                    } else {
+                                                        echo "Empty input";
+                                                    }
+                                                }
+                                                ?>
+                <div class="d-flex w-100 flex-wrap px-3 gap-2">
                     <style>
                         .test_flex {
                             width: 400px;
