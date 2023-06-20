@@ -134,11 +134,14 @@
                             $queryCheckRegistrationAccount = mysqli_query($conn, "Select *from register where student_id='$stdId'");
                             $queryFecthAccountStatus = mysqli_fetch_assoc($queryCheckRegistrationAccount);
                             //echo $queryFecthAccountStatus['enable_registration'];
+                            $numrow = $queryCheckRegistrationAccount->num_rows;
 
                             ?>
                             <button class="btn btn-primary" <?php
-                                                            if ($queryFecthAccountStatus['enable_registration'] == 'no') {
-                                                                echo "disabled";
+                                                            if ($numrow) {
+                                                                if ($queryFecthAccountStatus['enable_registration'] == 'no') {
+                                                                    echo "disabled";
+                                                                }
                                                             }
                                                             ?> name="register">Register</button>
                         </div>

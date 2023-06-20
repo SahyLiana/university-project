@@ -145,6 +145,7 @@
                                                                     echo "None";
                                                                 } else {
                                                                     echo $rowFetch['total'];
+                                                                    $total = $rowFetch['total'];
                                                                 }
                                                             } else {
                                                                 if (empty($examMarks) && empty($courseworkMarks)) {
@@ -162,6 +163,7 @@
 
                                                             ?></td>
                                                         <td><?php
+
                                                             if ($total != 0) {
 
                                                                 $grade = null;
@@ -289,6 +291,9 @@
                                                             echo "None";
                                                         } else {
                                                             echo $rowFetch['total'];
+                                                            $total = $rowFetch['total'];
+                                                            $i = $i + 1;
+                                                            $total_i = $total_i + 1;
                                                         }
                                                     } else {
                                                         if (empty($examMarks) && empty($courseworkMarks)) {

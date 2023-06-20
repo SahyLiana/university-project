@@ -41,25 +41,52 @@
                 </tr>
             </table>
             <div class="d-flex flex-row align-items-center">
-                <label for="coursework" class="me-2">CourseWork(out of 30):</label><input <?php
-                                                                                            if ($_SESSION['title'] == 'lecturer') {
-                                                                                                if (($marks != null && $marks >= 50) || $fetchRegister['registration_key'] === null) {
-                                                                                                    echo "disabled";
-                                                                                                }
-                                                                                            } ?> value="<?php
-                                                                                                        if ($marks != null) {
-                                                                                                            echo $fetchRegister['coursework'];
-                                                                                                        } ?>" type="number" min="0" max="30" class="form-control w-25" id="coursework" name="coursework">
+                <?php
+                if ($fetchRegister['status'] != 'transfer') {
+
+                ?>
+                    <label for="coursework" class="me-2">CourseWork(out of 30):</label><input <?php
+
+                                                                                                if ($_SESSION['title'] == 'lecturer') {
+                                                                                                    if (($marks != null && $marks >= 50) || $fetchRegister['registration_key'] === null) {
+                                                                                                        echo "disabled";
+                                                                                                    }
+                                                                                                } ?> value="<?php
+                                                                                                            if ($marks != null) {
+                                                                                                                echo $fetchRegister['coursework'];
+                                                                                                            } ?>" type="number" min="0" max="30" class="form-control w-25" id="coursework" name="coursework">
             </div>
             <div class="d-flex mt-2 flex-row align-items-center">
-                <label for="exam">Exam marks(out of 100):</label><input <?php if (($_SESSION['title'] == 'lecturer')) {
+                <label for="exam">Exam marks(out of 100):</label><input <?php
+
+
+                                                                        if (($_SESSION['title'] == 'lecturer')) {
                                                                             if ($marks != null && $marks >= 50 || $fetchRegister['registration_key'] === null) {
                                                                                 echo "disabled";
                                                                             }
-                                                                        } ?> value="<?php
+                                                                        }
+                                                                        ?> value="<?php
                                                                                     if ($marks != null) {
                                                                                         echo $fetchRegister['exam_marks'];
-                                                                                    } ?>" type="number" min="0" max="100" class="form-control w-25" id="exam" name="exam">
+                                                                                    }
+                                                                                    ?>" type="number" min="0" max="100" class="form-control w-25" id="exam" name="exam">
+            <?php
+                } else {
+            ?>
+                <label for="total">Total(out of 100):</label><input <?php
+
+
+                                                                    if (($_SESSION['title'] == 'lecturer')) {
+                                                                        if ($marks != null && $marks >= 50 || $fetchRegister['registration_key'] === null) {
+                                                                            echo "disabled";
+                                                                        }
+                                                                    }
+                                                                    ?> value="<?php
+                                                                                if ($marks != null) {
+                                                                                    echo $fetchRegister['total'];
+                                                                                }
+                                                                                ?>" type="number" min="0" max="100" class="form-control w-25" id="total" name="total"><?php
+                                                                                                                                                                    } ?>
             </div>
             <!-- <div class="d-flex flex-row align-items-center">
                 <label for="total">Total(out of 100):</label><input type="number" min="0" max="100" class="form-control w-25" id="total" name="total">
@@ -76,18 +103,25 @@
     </div>
     <?php
     if (isset($_POST['submit'])) {
-
-        $coursework = $_POST['coursework'];
-        $exam = $_POST['exam'];
-        if ($coursework >= 0 && $cousework <= 30 && $exam >= 0 && $exam <= 100) {
-            $queryUpdate = mysqli_query($conn, "Update register set coursework='$coursework',exam_marks='$exam' WHERE student_id='$stdId' AND cu_id='$cuId'");
-            header("location:view_result.php?id=$stdId");
-        } else {
+        if ($fetchRegister['status'] != "transfer") {
+            $coursework = $_POST['coursework'];
+            $exam = $_POST['exam'];
+            if ($coursework >= 0 && $cousework <= 30 && $exam >= 0 && $exam <= 100) {
+                $queryUpdate = mysqli_query($conn, "Update register set coursework='$coursework',exam_marks='$exam' WHERE student_id='$stdId' AND cu_id='$cuId'");
+                header("location:view_result.php?id=$stdId");
+            } else {
     ?>
-            <script>
-                alert("Error input");
-            </script>
+                <script>
+                    alert("Error input");
+                </script>
     <?php
+            }
+        } else {
+            $total = $_POST['total'];
+            if ($total >= 0 && $total <= 100) {
+                $queryUpdate = mysqli_query($conn, "Update register set total=$total WHERE student_id='$stdId' AND cu_id='$cuId'");
+                header("location:view_result.php?id=$stdId");
+            }
         }
     } else if (isset($_POST['cancel'])) {
         if ($_SESSION['title'] == 'admin') {
